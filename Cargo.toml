@@ -2,7 +2,7 @@
 name = "rfile"
 version = "0.1.0"
 edition = "2024"
-authors = ["kacpos"]
+authors = ["kapcos"]
 description = "A fast, single-shot CLI file and directory inspector"
 license = "MIT"
 repository = "https://github.com/kapcoos/rfile"
