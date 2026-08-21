@@ -1,8 +1,8 @@
 use clap::{ValueHint, Parser};
-use std::{arch::x86_64::_mm_lfence, fs, path::PathBuf};
+use std::{fs, path::PathBuf};
 use bytesize::ByteSize;
 use walkdir::WalkDir;
-use chrono::{Date, DateTime, Local};
+use chrono::{DateTime, Local};
 use filetime::FileTime;
 
 #[derive(Parser, Debug)]
