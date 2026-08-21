@@ -6,7 +6,7 @@ use chrono::{DateTime, Local};
 use filetime::FileTime;
 
 #[derive(Parser, Debug)]
-#[command(name = "my_cli", version, about)]
+#[command(name = "rfile", version, about)]
 struct Args {
 
     #[arg(value_hint = ValueHint::FilePath)]
