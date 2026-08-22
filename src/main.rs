@@ -63,8 +63,13 @@ fn main() {
         return;
     }
 
-    let name = args.file.file_name().unwrap().to_string_lossy();
-    let absolute_path = args.file.canonicalize().unwrap();
+    let name = args.file.file_name()
+        .map(|n| n.to_string_lossy())
+        .unwrap_or_else(|| args.file.to_string_lossy());
+
+    let absolute_path = args.file.canonicalize()
+        .unwrap_or_else(|_| args.file.clone());
+
     let modified_time = get_modified_time(&args.file);
 
     let (raw_size, dir_info) = if args.file.is_dir() {
@@ -74,7 +79,7 @@ fn main() {
             Some(format!("{} files, {} folders", stats.file_count, stats.dir_count)),
         )
     } else {
-        (fs::metadata(&args.file).unwrap().len(), None)
+        (fs::metadata(&args.file). map(|m| m.len()).unwrap_or(0), None)
     };
 
 

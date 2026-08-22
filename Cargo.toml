@@ -1,6 +1,6 @@
 [package]
 name = "rfile"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 authors = ["kapcos"]
 description = "A fast, single-shot CLI file and directory inspector"
