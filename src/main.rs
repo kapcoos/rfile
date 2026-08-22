@@ -69,6 +69,8 @@ fn main() {
 
     let absolute_path = args.file.canonicalize()
         .unwrap_or_else(|_| args.file.clone());
+    let display_path = absolute_path.to_string_lossy();
+    let clean_path = display_path.strip_prefix(r"\\?\").unwrap_or(&display_path);
 
     let modified_time = get_modified_time(&args.file);
 
@@ -79,7 +81,7 @@ fn main() {
             Some(format!("{} files, {} folders", stats.file_count, stats.dir_count)),
         )
     } else {
-        (fs::metadata(&args.file). map(|m| m.len()).unwrap_or(0), None)
+        (fs::metadata(&args.file).map(|m| m.len()).unwrap_or(0), None)
     };
 
 
@@ -89,7 +91,7 @@ fn main() {
     } else {
         match infer::get_from_path(&args.file) {
             Ok(Some(info)) => info.mime_type().to_string(),
-            Ok(None) => "plain text / unkown binary".to_string(),
+            Ok(None) => "plain text / unknown binary".to_string(),
             Err(_) => "error reading file".to_string()
         }
     };
@@ -98,7 +100,7 @@ fn main() {
 
     println!("Name: {}",name);
     println!("Type: {}", file_type);
-    println!("Path: {}", absolute_path.display());
+    println!("Path: {}", clean_path);
     println!("Size: {}", formatted_size);
     println!("Last Modified: {}", modified_time);
 
